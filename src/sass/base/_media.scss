@@ -1,0 +1,9 @@
+@media (max-width:576px){
+    header{
+        &__contacts{
+            &__phone{
+                font-size: 15px;
+            }
+        }
+    }
+}
