@@ -42,5 +42,31 @@ $(document).ready(function(){
     }
 
     toggler('.catalog-item__link');
-    toggler('.catalog-item__back')
+    toggler('.catalog-item__back');
+
+    //modal
+
+    $('[data-modal=consultation]').on('click', function(){
+         $('.overlay, #consultation').fadeIn()
+    });
+
+    $('.modal__close').on('click', function(){
+        $('.overlay, #consultation, #oreder, #thanks').fadeOut()
+   });
+
+
+
+   $('.button_catalog').each(function(i){
+    $(this).on('click', function(){
+        $('.modal__descr').text($('.catalog-item__subtitle').eq(i).text())
+        $('.overlay, #order').fadeIn()
+    })
+   })
+
+   $('#consultation-form').validate();
+   $('#consultation form').validate();
+   $('#order form').validate();
+
+
+
   });
