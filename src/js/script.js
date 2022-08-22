@@ -64,9 +64,17 @@ $(document).ready(function(){
    })
 
    $('#consultation-form').validate();
-   $('#consultation form').validate();
+   $('#consultation form').validate({
+      rules: {
+        name: required,
+        phone: required,
+        email:{
+            required:true,
+            email: true
+        }
+      }
+   });
    $('#order form').validate();
 
-
-
+   $('input[name=phone]').mask("(999) 99-99-999");
   });
