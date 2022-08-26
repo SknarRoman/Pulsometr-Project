@@ -62,19 +62,61 @@ $(document).ready(function(){
         $('.overlay, #order').fadeIn()
     })
    })
+// Validation of forms
 
-   $('#consultation-form').validate();
-   $('#consultation form').validate({
-      rules: {
-        name: required,
-        phone: required,
-        email:{
-            required:true,
-            email: true
-        }
-      }
+   function validateForms(form){
+    $(form).validate({
+        rules:{
+            name: {
+                required: true,
+                minlength: 2
+            },
+            phone: 'required',
+            email: {
+                required:true,
+                email: true,
+            }
+        },
+        messages: {
+            name: {
+                required: "Пожалуйста, введите свое имя",
+                minlength: jQuery.validator.format("Имя должно содержать хотя бы {0} символа!")
+              },
+            phone: 'Пожалуйста, введите свой номер телефона',
+            email: {
+              required: "Пожалуйста, введите свою почту",
+              email: "Ваш e-mail должен соответствовать name@domain.com"
+            }
+        }  
    });
-   $('#order form').validate();
+   }
+   validateForms('#consultation-form');
+   validateForms('#consultation form');
+   validateForms('#order form');
 
-   $('input[name=phone]').mask("(999) 99-99-999");
+   //maskedInput
+
+   $('input[name=phone').mask("+38 (999) 999-99-99");
+   
+   //mailer
+   $('form').submit(function(e){
+    e.preventDefault();
+
+    if(!$(this).valid()){
+        return
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "mailer/smart.php",
+        data: $(this).serialize()
+    }).done(function(){
+        $(this).find("input").val("");
+
+        
+
+        $("form").trigger('reset');
+    });
+    return false;
+   });
   });

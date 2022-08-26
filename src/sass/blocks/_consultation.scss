@@ -7,4 +7,13 @@
         line-height: 30px;
         color: #FFFFFF;
     }
+    .error{
+        color:#FFFFFF;
+        border: 1px solid $main-color;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    label.error{
+        border:none;
+    }
 }
